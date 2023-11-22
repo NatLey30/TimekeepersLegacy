@@ -9,6 +9,7 @@ TagManager:
   - Target
   - Car
   - Fin
+  - Bull
   layers:
   - Default
   - TransparentFX
