@@ -10,6 +10,7 @@ TagManager:
   - Car
   - Fin
   - Bull
+  - Sarcophagus
   layers:
   - Default
   - TransparentFX

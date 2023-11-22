@@ -13,6 +13,10 @@ public class PlayerControllerPyramid : MonoBehaviour
     private Camera camera;
     Transform cameraFollow;
 
+    // Delegate and an event for collision events
+    public delegate void GroundCollisionEvent();
+    public static event GroundCollisionEvent OnSarcophagusCollision;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,5 +43,14 @@ public class PlayerControllerPyramid : MonoBehaviour
             cameraFollow.position = new Vector3(transform.position.x, transform.position.y + 2f, cameraFollow.position.z);
         }
 
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Only when colliding with objects with Ground tag, can the player jump
+        if (collision.gameObject.tag == "Sarcophagus")
+        {
+            Debug.Log("You Win");
+            OnSarcophagusCollision?.Invoke();
+        }
     }
 }
