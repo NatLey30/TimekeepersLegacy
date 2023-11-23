@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]  // Reference to the player's GameObject
+    //[SerializeField]  // Reference to the player's GameObject
 
     private List<string> sceneNames = new List<string>();
-    private string currentScene; // The name of the current scene
+    private string currentScene;
     private Material material;
 
     public Material Material
@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         currentScene = SceneManager.GetActiveScene().name;
-        sceneNames.Add("SceneAmericanWildWest");
+
+        //sceneNames.Add("SceneAmericanWildWest");
         sceneNames.Add("SceneDystopicFuture");
         sceneNames.Add("SceneEgypt");
-        sceneNames.Add("SceneMiddleAges");
-        sceneNames.Add("ScenePrehistory");
-        sceneNames.Add("ScenePresent");
-        sceneNames.Add("SceneQinDinasty");
+        //sceneNames.Add("SceneMiddleAges");
+        //sceneNames.Add("ScenePrehistory");
+        //sceneNames.Add("ScenePresent");
+        //sceneNames.Add("SceneQinDinasty");
     }
 
     // Update is called once per frame
@@ -39,11 +40,16 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene("SceneDystopicFuture");
+    }
+
     public void TransitionToRandomScene()
     {
-        string currentSceneName = currentScene;
+        currentScene = SceneManager.GetActiveScene().name;
 
-        sceneNames.Remove(currentSceneName);
+        sceneNames.Remove(currentScene);
 
         // Randomly choose a scene from the available scenes.
         int randomIndex = Random.Range(0, sceneNames.Count);

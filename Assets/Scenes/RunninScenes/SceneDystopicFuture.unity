@@ -525,6 +525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 362861253}
   - component: {fileID: 362861254}
+  - component: {fileID: 362861255}
   m_Layer: 0
   m_Name: Ruins2
   m_TagString: Untagged
@@ -599,6 +600,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &362861255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362861252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &481962347
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646873425}
   - component: {fileID: 646873424}
+  - component: {fileID: 646873426}
   m_Layer: 0
   m_Name: BuildingBackground6
   m_TagString: Untagged
@@ -814,6 +829,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 628069824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &646873426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646873423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &657107623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 875436263}
   - component: {fileID: 875436264}
+  - component: {fileID: 875436265}
   m_Layer: 0
   m_Name: BuildingBackGround2
   m_TagString: Untagged
@@ -1113,6 +1142,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &875436265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875436262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &907022726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 918055806}
   - component: {fileID: 918055807}
+  - component: {fileID: 918055808}
   m_Layer: 0
   m_Name: Ruins
   m_TagString: Untagged
@@ -1236,6 +1279,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &918055808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918055805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &954199254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,8 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  previousCamPosition: {x: 0, y: 0, z: 0}
+  animationSpeed: 1
 --- !u!1 &1139558757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1282716938}
   - component: {fileID: 1282716939}
+  - component: {fileID: 1282716940}
   m_Layer: 0
   m_Name: edificio
   m_TagString: Untagged
@@ -1813,6 +1869,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1282716940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282716937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &1356224486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,6 +2023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420194905}
   - component: {fileID: 1420194906}
+  - component: {fileID: 1420194907}
   m_Layer: 0
   m_Name: RuinsBackground
   m_TagString: Untagged
@@ -2028,6 +2098,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1420194907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420194904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &1420892195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539252221}
   - component: {fileID: 1539252220}
+  - component: {fileID: 1539252222}
   m_Layer: 0
   m_Name: BuildingBackground7
   m_TagString: Untagged
@@ -2242,6 +2326,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 628069824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539252222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539252219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &1631866668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1805699492}
   - component: {fileID: 1805699491}
+  - component: {fileID: 1805699493}
   m_Layer: 0
   m_Name: BuildingBackground10
   m_TagString: Untagged
@@ -2509,6 +2607,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 628069824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1805699493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805699490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &1927611911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927611913}
   - component: {fileID: 1927611912}
+  - component: {fileID: 1927611914}
   m_Layer: 0
   m_Name: BuildingBackground5
   m_TagString: Untagged
@@ -2593,6 +2705,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 628069824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1927611914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927611911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3df09a9b3db804f82e0e0d2a8950e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 1
 --- !u!1 &1934380834
 GameObject:
   m_ObjectHideFlags: 0

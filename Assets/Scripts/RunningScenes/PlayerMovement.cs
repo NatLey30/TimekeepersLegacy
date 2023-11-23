@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     // Variables assigned in unity
     // [SerializeField] private Transform cameraFollow;
 
-    private float speed = 8f;
+    private float speed = 10f;
     private float jumpingPower = 15f;
     private bool isFacingRight = true;
     private bool canJump = true;

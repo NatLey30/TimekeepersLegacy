@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40ec1a862ed9324f8313aea838c9176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1322702343}
 --- !u!4 &258626305
 Transform:
   m_ObjectHideFlags: 0
@@ -839,11 +838,6 @@ CanvasRenderer:
 --- !u!1 &1322702332 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2134887501668941185, guid: c7aa0c09f5452484985e1d067b78a0c7, type: 3}
-  m_PrefabInstance: {fileID: 1834311159}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1322702343 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3727566352962132379, guid: c7aa0c09f5452484985e1d067b78a0c7, type: 3}
   m_PrefabInstance: {fileID: 1834311159}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411552416
@@ -1659,10 +1653,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1556690275}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 5
+      - m_Target: {fileID: 258626304}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
