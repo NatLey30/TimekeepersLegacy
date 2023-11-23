@@ -17,7 +17,7 @@ public class BowController : MonoBehaviour
     private int numberPoints = 15;
     private float spacePoints = 0.05f;
 
-    private int numberArrows = 10;
+    private int numberArrows = 5;
 
 
     public int NumberArrows

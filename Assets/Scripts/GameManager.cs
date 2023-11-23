@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //[SerializeField]  // Reference to the player's GameObject
-
     private List<string> sceneNames = new List<string>();
     private string currentScene;
     private Material material;
