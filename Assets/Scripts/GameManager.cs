@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
     private void LoadPlayerPosition()
     {
         // Load the player's position from PlayerPrefs
-        float posX = playerData.PosX;
+        float posX = playerData.PosX + 5f;
         float posY = playerData.PosY;
         float posZ = playerData.PosZ;
 
