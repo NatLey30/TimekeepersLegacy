@@ -69,7 +69,6 @@ public class UIManager : MonoBehaviour
 
     private void EndGame(string end)
     {
-
         gameEnd.text = end;
 
         canvasFin.enabled = true;

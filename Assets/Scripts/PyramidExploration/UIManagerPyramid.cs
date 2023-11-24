@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,9 +13,15 @@ public class UIManagerPyramid : MonoBehaviour
     [SerializeField] private Canvas canvasFin;
     [SerializeField] private TextMeshProUGUI gameEnd;
 
+
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Get GameManager
+        gameManager = FindObjectOfType<GameManager>();
+
         canvasFin.enabled = false;
         player.SetActive(false);
 
@@ -52,5 +59,10 @@ public class UIManagerPyramid : MonoBehaviour
 
         canvasFin.enabled = true;
         player.SetActive(false);
+    }
+
+    public void ReturnToRunningScene()
+    {
+        gameManager.ReturnToRunningScene();
     }
 }

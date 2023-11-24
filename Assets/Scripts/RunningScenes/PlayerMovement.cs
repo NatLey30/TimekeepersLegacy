@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Variables assigned in unity
-    // [SerializeField] private Transform cameraFollow;
-
     private float speed = 10f;
     private float jumpingPower = 15f;
     private bool isFacingRight = true;
@@ -17,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
 
     private Camera camera;
-    Transform cameraFollow;
+    private Transform cameraFollow;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +87,39 @@ public class PlayerMovement : MonoBehaviour
         {
             gameManager.TransitionToRandomScene();
         }
+
+        // 1 -> Pyramid Exploration Minigame
+        // 2 -> Archery Minigame
+        // 3 -> CrossRoad Minigame
+        // 4 -> SpellingBee Minigame
+        // 5 -> Puzzle Minigame
+
+        if (collision.gameObject.CompareTag("ObjectEgypt"))
+        {
+            gameManager.ChangeObjectScene(1);
+        }
+
+        /*
+        if (collision.gameObject.CompareTag("ObjectMedieval"))
+        {
+            gameManager.ChangeObjectScene(2);
+        }
+
+        if (collision.gameObject.CompareTag("ObjectPresent"))
+        {
+            gameManager.ChangeObjectScene(3);
+        }
+
+        if (collision.gameObject.CompareTag("ObjectPrehistory"))
+        {
+            gameManager.ChangeObjectScene(4);
+        }
+
+        if (collision.gameObject.CompareTag("ObjectPuzzle"))
+        {
+            gameManager.ChangeObjectScene(5);
+        }
+        */
     }
 
 }

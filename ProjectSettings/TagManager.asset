@@ -11,6 +11,7 @@ TagManager:
   - Fin
   - Bull
   - Sarcophagus
+  - ObjectEgypt
   layers:
   - Default
   - TransparentFX

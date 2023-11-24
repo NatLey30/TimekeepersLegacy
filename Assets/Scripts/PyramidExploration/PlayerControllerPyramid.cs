@@ -49,7 +49,6 @@ public class PlayerControllerPyramid : MonoBehaviour
         // Only when colliding with objects with Ground tag, can the player jump
         if (collision.gameObject.tag == "Sarcophagus")
         {
-            Debug.Log("You Win");
             OnSarcophagusCollision?.Invoke();
         }
     }
