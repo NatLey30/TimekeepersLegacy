@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Jump") && canJump)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpingPower);
@@ -86,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Limit"))
         {
             gameManager.TransitionToRandomScene();
+        }
+
+        if(collision.gameObject.CompareTag("Die"))
+        {
+            gameManager.EndGame();
         }
 
         // 1 -> Pyramid Exploration Minigame

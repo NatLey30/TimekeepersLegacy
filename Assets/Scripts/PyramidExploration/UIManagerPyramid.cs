@@ -8,9 +8,11 @@ using UnityEngine;
 public class UIManagerPyramid : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject timer;
 
     [SerializeField] private Canvas canvasStart;
     [SerializeField] private Canvas canvasFin;
+    [SerializeField] private Canvas canvasTimer;
     [SerializeField] private TextMeshProUGUI gameEnd;
 
 
@@ -23,7 +25,9 @@ public class UIManagerPyramid : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
 
         canvasFin.enabled = false;
+        canvasTimer.enabled = false;
         player.SetActive(false);
+        timer.SetActive(false);
 
         // Subscribe to the CarController's collision event
         PlayerControllerPyramid.OnSarcophagusCollision += HandleCollision;
@@ -38,13 +42,15 @@ public class UIManagerPyramid : MonoBehaviour
     public void StartGame()
     {
         canvasStart.enabled = false;
+        canvasTimer.enabled = true;
         player.SetActive(true);
+        timer.SetActive(true);
     }
 
     // Handle the arrow collision event
     private void HandleCollision()
     {
-        EndGame("You Win");
+        EndGame("You Win", true);
     }
 
     // Unsubscribe from the event when this script is disabled or destroyed
@@ -53,12 +59,14 @@ public class UIManagerPyramid : MonoBehaviour
         PlayerControllerPyramid.OnSarcophagusCollision -= HandleCollision;
     }
 
-    private void EndGame(string end)
+    public void EndGame(string end, bool win)
     {
         gameEnd.text = end;
 
         canvasFin.enabled = true;
+        canvasTimer.enabled = false;
         player.SetActive(false);
+        timer.SetActive(false);
     }
 
     public void ReturnToRunningScene()

@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     private List<string> sceneNames = new List<string>();
     private string currentScene;
 
+    public static GameManager Instance { get; private set; }
+
     public Material Material
     {
         get { return material; }
@@ -78,10 +80,14 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void StartGame()
+    private void Awake()
     {
-        // Start the game on the same scene every time
-        ChangeScene("SceneDystopicFuture", true);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
     }
 
     public void TransitionToRandomScene()
@@ -139,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void ChangeScene(string Name, bool find)
+    public void ChangeScene(string Name, bool find)
     {
         // Load the scene
         SceneManager.LoadScene(Name);
@@ -203,6 +209,8 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        ChangeScene("Menu", false);
+        Debug.Log("Fin");
 
     }
 

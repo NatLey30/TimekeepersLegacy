@@ -12,6 +12,7 @@ TagManager:
   - Bull
   - Sarcophagus
   - ObjectEgypt
+  - Die
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ public class Paralax : MonoBehaviour
     void Start()
     {
         // Get the material from the Renderer
-        Renderer renderer = GetComponent<Renderer>();
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         material = renderer.material;
 
         // Store the original offset for reference
