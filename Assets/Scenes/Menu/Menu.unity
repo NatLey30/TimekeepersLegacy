@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40ec1a862ed9324f8313aea838c9176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2134887501668941185, guid: c7aa0c09f5452484985e1d067b78a0c7, type: 3}
+  objectEgyptPrefab: {fileID: 3405465288754322046, guid: a34a8b5624bc123469be22863dc084b7, type: 3}
+  objectMiddleAgesPrefab: {fileID: 3405465288754322046, guid: d99d6cdc2d85a7648bf2a879235f703c, type: 3}
 --- !u!4 &258626305
 Transform:
   m_ObjectHideFlags: 0

@@ -22,6 +22,6 @@ public class CotrollerMenu : MonoBehaviour
     public void StartGame()
     {
         // Start the game on the same scene every time
-        gameManager.ChangeScene("SceneDystopicFuture", true);
+        gameManager.StartGame();
     }
 }

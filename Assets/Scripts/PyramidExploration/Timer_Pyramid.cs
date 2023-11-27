@@ -27,7 +27,7 @@ public class Timer_Pyramid : MonoBehaviour
         if (targetTime <= 0.0f)
         {
             // Call the EndGame method
-            manager.EndGame("Time's up!", false);
+            manager.EndGame("Time's up!");
         }
 
     }

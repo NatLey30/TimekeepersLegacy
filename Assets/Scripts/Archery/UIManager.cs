@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,11 +16,17 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private BowController bowController;
 
+    private GameManager gameManager;
+
     private int numberArrows;
+    private bool win;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get GameManager
+        gameManager = FindObjectOfType<GameManager>();
+
         canvasFin.enabled = false;
         bow.SetActive(false);
         target.SetActive(false);
@@ -47,16 +54,16 @@ public class UIManager : MonoBehaviour
         if (hit)
         {
             // Handle arrow hit.
-            Debug.Log("Hit");
             EndGame("You Win");
+            win = true;
         }
         else
         {
             // Handle arrow miss.
-            Debug.Log("Miss");
             if (numberArrows == 0)
             {
                 EndGame("GameOver");
+                win = false;
             }
         }
     }
@@ -76,4 +83,8 @@ public class UIManager : MonoBehaviour
         target.SetActive(false);
     }
 
+    public void ReturnToRunningScene()
+    {
+        gameManager.ReturnToRunningScene(win);
+    }
 }

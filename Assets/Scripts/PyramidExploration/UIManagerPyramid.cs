@@ -17,6 +17,7 @@ public class UIManagerPyramid : MonoBehaviour
 
 
     private GameManager gameManager;
+    private bool win = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,8 @@ public class UIManagerPyramid : MonoBehaviour
     // Handle the arrow collision event
     private void HandleCollision()
     {
-        EndGame("You Win", true);
+        EndGame("You Win");
+        win = true;
     }
 
     // Unsubscribe from the event when this script is disabled or destroyed
@@ -59,7 +61,7 @@ public class UIManagerPyramid : MonoBehaviour
         PlayerControllerPyramid.OnSarcophagusCollision -= HandleCollision;
     }
 
-    public void EndGame(string end, bool win)
+    public void EndGame(string end)
     {
         gameEnd.text = end;
 
@@ -71,6 +73,6 @@ public class UIManagerPyramid : MonoBehaviour
 
     public void ReturnToRunningScene()
     {
-        gameManager.ReturnToRunningScene();
+        gameManager.ReturnToRunningScene(win);
     }
 }

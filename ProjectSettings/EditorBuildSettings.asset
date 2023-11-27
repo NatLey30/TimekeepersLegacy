@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGames/PyramidExploration.unity
     guid: d7051e22830ba0b40a52492b4b8c7e64
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/Archery.unity
+    guid: 3fa3c1c201d63ec43a2f1b87039e88a8
   m_configObjects: {}

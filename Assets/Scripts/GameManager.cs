@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerData
@@ -37,13 +39,28 @@ public class GameManager : MonoBehaviour
 {
     PlayerData playerData = new PlayerData();
 
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject objectEgyptPrefab;
+    [SerializeField] private GameObject objectMiddleAgesPrefab;
+    //[SerializeField] private GameObject objectPresentPrefab;
+    //[SerializeField] private GameObject objectPrehistoryPrefab;
+    //[SerializeField] private GameObject objectJapanPrefab;
 
     private GameObject player;
+    private GameObject objectEgypt;
+    private GameObject objectMiddleAges;
+    //private GameObject objectPresent;
+    //private GameObject objectPrehistory;
+    //private GameObject objectJapan;
     private Material material;
 
     private List<string> sceneNames = new List<string>();
     private string currentScene;
+
+    private bool objectEgyptDone = false;
+    private bool objectMiddleAgesDone = false;
+    private bool objectPresentDone = false;
+    private bool objectPrehistoryDone = false;
+    private bool objectJapanDone = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -51,6 +68,27 @@ public class GameManager : MonoBehaviour
     {
         get { return material; }
         set { material = value; }
+    }
+
+    public bool ObjectEgyptDone
+    {
+        get { return objectEgyptDone;}
+    }
+    public bool ObjectMiddleAgesDone
+    {
+        get { return objectMiddleAgesDone; }
+    }
+    public bool ObjectPresentDone
+    {
+        get { return objectPresentDone; }
+    }
+    public bool ObjectPrehistoryDone
+    {
+        get { return objectPrehistoryDone; }
+    }
+    public bool ObjectJapanDone
+    {
+        get { return objectJapanDone; }
     }
 
     // Start is called before the first frame update
@@ -65,10 +103,8 @@ public class GameManager : MonoBehaviour
 
         currentScene = SceneManager.GetActiveScene().name;
 
-        //sceneNames.Add("SceneAmericanWildWest");
-        sceneNames.Add("SceneDystopicFuture");
         sceneNames.Add("SceneEgypt");
-        //sceneNames.Add("SceneMiddleAges");
+        sceneNames.Add("SceneMiddleAges");
         //sceneNames.Add("ScenePrehistory");
         //sceneNames.Add("ScenePresent");
         //sceneNames.Add("SceneQinDinasty");
@@ -92,11 +128,14 @@ public class GameManager : MonoBehaviour
 
     public void TransitionToRandomScene()
     {
-        List<string> sceneNamesCopy = sceneNames;
+        List<string> sceneNamesCopy = new List<string>(sceneNames);
 
         currentScene = SceneManager.GetActiveScene().name;
 
-        sceneNamesCopy.Remove(currentScene);
+        if (currentScene != "SceneDystopicFuture")
+        {
+            sceneNamesCopy.Remove(currentScene);
+        }
 
         // Randomly choose a scene from the available scenes.
         int randomIndex = Random.Range(0, sceneNamesCopy.Count);
@@ -104,6 +143,11 @@ public class GameManager : MonoBehaviour
 
         // Load the chosen scene.
         ChangeScene(sceneToLoad, true);
+
+        // Place Minigame Object
+        StartCoroutine(DelayedPlaceObject(sceneToLoad));
+
+
     }
 
     public void ChangeObjectScene(int num)
@@ -124,11 +168,18 @@ public class GameManager : MonoBehaviour
             // Load the Pyramid Exploration Minigame scene
             ChangeScene("PyramidExploration", false);
         }
-        /*
         else if (num == 2)
         {
+            // Save player's position too
+            SavePlayerPosition();
 
+            // Save current scene mame
+            currentScene = SceneManager.GetActiveScene().name;
+
+            // Load the Pyramid Exploration Minigame scene
+            ChangeScene("Archery", false);
         }
+        /*
         else if (num == 3)
         {
 
@@ -145,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ChangeScene(string Name, bool find)
+    private void ChangeScene(string Name, bool find)
     {
         // Load the scene
         SceneManager.LoadScene(Name);
@@ -166,6 +217,64 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private IEnumerator DelayedPlaceObject(string sceneToLoad)
+    {
+        // Wait for the next frame
+        yield return null;
+
+        if (sceneToLoad == "SceneEgypt")
+        {
+            objectEgypt = Instantiate(objectEgyptPrefab);
+            objectEgypt.transform.position = new Vector3(80, 0, 0);
+
+            if (objectEgyptDone)
+            {
+                objectEgypt.layer = LayerMask.NameToLayer("ObjectFound");
+
+                ChangeTransparency(objectEgypt);
+            }
+        }
+        else if (sceneToLoad == "SceneMiddleAges")
+        {
+            objectMiddleAges = Instantiate(objectMiddleAgesPrefab);
+            objectMiddleAges.transform.position = new Vector3(80, 0, 0);
+
+            if (objectMiddleAgesDone)
+            {
+                objectMiddleAges.layer = LayerMask.NameToLayer("ObjectFound");
+                ChangeTransparency(objectMiddleAges);
+            }
+        }
+        /*
+        else if (sceneToLoad == "")
+        {
+            
+        }
+        else if (sceneToLoad == "")
+        {
+            
+        }
+        else if (sceneToLoad == "")
+        {
+            
+        }
+        */
+    }
+
+    private void ChangeTransparency(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+
+        // Get the current material color
+        Color currentColor = renderer.material.color;
+
+        // Set the new alpha value
+        currentColor.a = 0.2f;
+
+        // Update the material color with the new alpha
+        renderer.material.color = currentColor;
+    }
+
     private void SavePlayerPosition()
     {
         playerData.PosX = player.transform.position.x;
@@ -184,17 +293,41 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(posX, posY, posZ);
     }
 
-    public void ReturnToRunningScene()
+    public void ReturnToRunningScene(bool win)
     {
         // Load the last scene
         ChangeScene(currentScene, true);
 
-        // Lets disable the object for the minigame+
-        // objectMinigame.SetActive(false);
-
         // Load the player's position previously saved
         // We have to delay a little bit to find the player object first
         StartCoroutine(DelayedLoadPlayerPosition());
+
+        // If win we have to deactivate the collider
+        if (win)
+        {
+            if (currentScene == "SceneEgypt")
+            {
+                objectEgyptDone = true;
+            }
+            else if (currentScene == "SceneMiddleAges")
+            {
+                objectMiddleAgesDone = true;
+            }
+            /*
+            else if (currentScene == "")
+            {
+                
+            }
+            else if (currentScene == "")
+            {
+
+            }
+            else if (currentScene == "")
+            {
+
+            }
+            */
+        }
 
     }
 
@@ -207,15 +340,19 @@ public class GameManager : MonoBehaviour
         LoadPlayerPosition();
     }
 
+    public void StartGame()
+    {
+        ChangeScene("SceneDystopicFuture", true);
+        currentScene = "SceneDystopicFuture";
+    }
+
     public void EndGame()
     {
         ChangeScene("Menu", false);
-        Debug.Log("Fin");
-
-    }
-
-    public void PauseGame()
-    {
-
+        objectEgyptDone = false;
+        objectMiddleAgesDone = false;
+        objectPresentDone = false;
+        objectPrehistoryDone = false;
+        objectJapanDone = false;
     }
 }

@@ -103,12 +103,11 @@ public class PlayerMovement : MonoBehaviour
             gameManager.ChangeObjectScene(1);
         }
 
-        /*
-        if (collision.gameObject.CompareTag("ObjectMedieval"))
+        if (collision.gameObject.CompareTag("ObjectMiddleAges"))
         {
             gameManager.ChangeObjectScene(2);
         }
-
+        /*
         if (collision.gameObject.CompareTag("ObjectPresent"))
         {
             gameManager.ChangeObjectScene(3);
