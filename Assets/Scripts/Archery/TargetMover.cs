@@ -1,26 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TargetMover : MonoBehaviour
 {
     [SerializeField] private float speed = 5f; // Speed of target movement
+    [SerializeField] private Texture2D deer1;
+    [SerializeField] private Texture2D deer2;
+
 
     private float leftBoundary = 0f; // Left boundary
     private float rightBoundary = 6f; // Right boundary
     private bool movingRight = false;
     private Vector3 direction = Vector3.right;
 
+    private bool deer = true;
+
+    private Renderer renderer;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.Rotate(0, 180, 0);
+        renderer = GetComponent<Renderer>();
+        ChangeTexture();
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveTarget();
+        ChangeTexture();
+
     }
 
     void MoveTarget()
@@ -45,5 +57,15 @@ public class TargetMover : MonoBehaviour
             movingRight = true;
             transform.Rotate(0, -180, 0);
         }
+    }
+ 
+    private void ChangeTexture()
+    {
+        Material material = renderer.material;
+
+        material.mainTexture = deer ? deer2 : deer1;
+
+        // Toggle 'deer' variable
+        deer = !deer;
     }
 }

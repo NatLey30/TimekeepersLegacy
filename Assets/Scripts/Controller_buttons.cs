@@ -15,6 +15,7 @@ public class Controller_buttons : MonoBehaviour
 
     private GameManager gameManager;
     private GameObject player;
+    private GameObject enemy;
 
     private bool objectEgyptDone = false;
     private bool objectMiddleAgesDone = false;
@@ -30,6 +31,7 @@ public class Controller_buttons : MonoBehaviour
 
         // Get Player
         player = GameObject.FindGameObjectWithTag("Player");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
 
         pause.enabled = false;
 
@@ -58,6 +60,21 @@ public class Controller_buttons : MonoBehaviour
         {
             ChangeTransparency(objectMiddleAges, 1f);
         }
+
+        if (objectPresentDone)
+        {
+            ChangeTransparency(objectPresent, 1f);
+        }
+
+        if (objectPrehistoryDone)
+        {
+            ChangeTransparency(objectPrehistory, 1f);
+        }
+
+        if (objectJapanDone)
+        {
+            ChangeTransparency(objectJapan, 1f);
+        }
     }
 
     private void ChangeTransparency(RawImage obj, float alpha)
@@ -80,11 +97,13 @@ public class Controller_buttons : MonoBehaviour
     {
         pause.enabled = true;
         player.SetActive(false);
+        enemy.SetActive(false);
     }
 
     public void ContinueGame()
     {
         pause.enabled = false;
         player.SetActive(true);
+        enemy.SetActive(true);
     }
 }

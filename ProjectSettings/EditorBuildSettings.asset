@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/RunninScenes/ScenePresent.unity
     guid: f5b99fc8cd7d24348880fb4f60c77fcd
   - enabled: 1
-    path: Assets/Scenes/RunninScenes/SceneQinDinasty.unity
+    path: Assets/Scenes/RunninScenes/SceneJapan.unity
     guid: ee093d64a370b1e4eb2a08a95253a855
   - enabled: 1
     path: Assets/Scenes/MiniGames/PyramidExploration.unity

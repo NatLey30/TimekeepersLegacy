@@ -35,22 +35,49 @@ public class PlayerData
     }
 }
 
+public class EnemyData
+{
+    private float posX;
+    private float posY;
+    private float posZ;
+
+    public float PosX
+    {
+        get { return posX; }
+        set { posX = value; }
+    }
+
+    public float PosY
+    {
+        get { return posY; }
+        set { posY = value; }
+    }
+
+    public float PosZ
+    {
+        get { return posZ; }
+        set { posZ = value; }
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     PlayerData playerData = new PlayerData();
+    EnemyData enemyData = new EnemyData();
 
     [SerializeField] private GameObject objectEgyptPrefab;
     [SerializeField] private GameObject objectMiddleAgesPrefab;
     //[SerializeField] private GameObject objectPresentPrefab;
-    //[SerializeField] private GameObject objectPrehistoryPrefab;
-    //[SerializeField] private GameObject objectJapanPrefab;
+    [SerializeField] private GameObject objectPrehistoryPrefab;
+    [SerializeField] private GameObject objectJapanPrefab;
 
     private GameObject player;
+    private GameObject enemy;
     private GameObject objectEgypt;
     private GameObject objectMiddleAges;
     //private GameObject objectPresent;
-    //private GameObject objectPrehistory;
-    //private GameObject objectJapan;
+    private GameObject objectPrehistory;
+    private GameObject objectJapan;
     private Material material;
 
     private List<string> sceneNames = new List<string>();
@@ -95,8 +122,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Get Player
-        // player = FindObjectOfType<PlayerMovement>();
         player = GameObject.FindGameObjectWithTag("Player");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
 
         // We dont want the game manager to be destrayed when changing scenes
         DontDestroyOnLoad(gameObject);
@@ -105,9 +132,9 @@ public class GameManager : MonoBehaviour
 
         sceneNames.Add("SceneEgypt");
         sceneNames.Add("SceneMiddleAges");
-        //sceneNames.Add("ScenePrehistory");
+        sceneNames.Add("ScenePrehistory");
         //sceneNames.Add("ScenePresent");
-        //sceneNames.Add("SceneQinDinasty");
+        sceneNames.Add("SceneJapan");
     }
 
     // Update is called once per frame
@@ -161,6 +188,7 @@ public class GameManager : MonoBehaviour
         {
             // Save player's position too
             SavePlayerPosition();
+            SaveEnemyPosition();
 
             // Save current scene mame
             currentScene = SceneManager.GetActiveScene().name;
@@ -172,6 +200,7 @@ public class GameManager : MonoBehaviour
         {
             // Save player's position too
             SavePlayerPosition();
+            SaveEnemyPosition();
 
             // Save current scene mame
             currentScene = SceneManager.GetActiveScene().name;
@@ -184,13 +213,31 @@ public class GameManager : MonoBehaviour
         {
 
         }
-        else if(num == 4)
+        */
+        else if (num == 4)
         {
+            // Save player's position too
+            SavePlayerPosition();
+            SaveEnemyPosition();
 
+            // Save current scene mame
+            currentScene = SceneManager.GetActiveScene().name;
+
+            // Load the Pyramid Exploration Minigame scene
+            ChangeScene("SpellingBee", false);
         }
+        /*
         else
         {
+            // Save player's position too
+            SavePlayerPosition();
+            SaveEnemyPosition();
 
+            // Save current scene mame
+            currentScene = SceneManager.GetActiveScene().name;
+
+            // Load the Pyramid Exploration Minigame scene
+            ChangeScene("Puzzle", false);
         }
         */
 
@@ -205,6 +252,7 @@ public class GameManager : MonoBehaviour
         if (find)
         {
             StartCoroutine(DelayedFindPlayer());
+            StartCoroutine(DelayedFindEnemy());
         }
     }
 
@@ -215,6 +263,15 @@ public class GameManager : MonoBehaviour
 
         // Get Player in the new Scene
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private IEnumerator DelayedFindEnemy()
+    {
+        // Wait for the next frame
+        yield return null;
+
+        // Get Player in the new Scene
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     private IEnumerator DelayedPlaceObject(string sceneToLoad)
@@ -250,29 +307,31 @@ public class GameManager : MonoBehaviour
         {
             
         }
+        */
         else if (sceneToLoad == "")
         {
-            
+            objectPrehistory = Instantiate(objectPrehistoryPrefab);
+            objectPrehistory.transform.position = new Vector3(80, 0, 0);
+
+            if (objectPrehistoryDone)
+            {
+                objectPrehistory.layer = LayerMask.NameToLayer("ObjectFound");
+                ChangeTransparency(objectPrehistory);
+            }
         }
-        else if (sceneToLoad == "")
+        /*
+        else if (sceneToLoad == "SceneJapan")
         {
-            
+            objectJapan = Instantiate(objectJapanPrefab);
+            objectJapan.transform.position = new Vector3(80, 0, 0);
+
+            if (objectJapanDone)
+            {
+                objectJapan.layer = LayerMask.NameToLayer("ObjectFound");
+                ChangeTransparency(objectJapan);
+            }
         }
         */
-    }
-
-    private void ChangeTransparency(GameObject obj)
-    {
-        Renderer renderer = obj.GetComponent<Renderer>();
-
-        // Get the current material color
-        Color currentColor = renderer.material.color;
-
-        // Set the new alpha value
-        currentColor.a = 0.2f;
-
-        // Update the material color with the new alpha
-        renderer.material.color = currentColor;
     }
 
     private void SavePlayerPosition()
@@ -293,6 +352,42 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(posX, posY, posZ);
     }
 
+    private IEnumerator DelayedLoadPlayerPosition()
+    {
+        // Wait for the next frame
+        yield return null;
+
+        // Get Player in position
+        LoadPlayerPosition();
+    }
+
+    private void SaveEnemyPosition()
+    {
+        enemyData.PosX = enemy.transform.position.x;
+        enemyData.PosY = enemy.transform.position.y;
+        enemyData.PosZ = enemy.transform.position.z;
+    }
+
+    private void LoadEnemyPosition()
+    {
+        // Load the player's position from PlayerPrefs
+        float posX = enemyData.PosX + 5f;
+        float posY = enemyData.PosY;
+        float posZ = enemyData.PosZ;
+
+        // Set the player's position
+        enemy.transform.position = new Vector3(posX, posY, posZ);
+    }
+
+    private IEnumerator DelayedLoadEnemyPosition()
+    {
+        // Wait for the next frame
+        yield return null;
+
+        // Get Player in position
+        LoadEnemyPosition();
+    }
+
     public void ReturnToRunningScene(bool win)
     {
         // Load the last scene
@@ -301,6 +396,7 @@ public class GameManager : MonoBehaviour
         // Load the player's position previously saved
         // We have to delay a little bit to find the player object first
         StartCoroutine(DelayedLoadPlayerPosition());
+        StartCoroutine(DelayedLoadEnemyPosition());
 
         // If win we have to deactivate the collider
         if (win)
@@ -318,27 +414,38 @@ public class GameManager : MonoBehaviour
             {
                 
             }
-            else if (currentScene == "")
+            */
+            else if (currentScene == "ScenePrehistory")
             {
-
+                objectPrehistoryDone = true;
             }
-            else if (currentScene == "")
+            /*
+            else if (currentScene == "Japan")
             {
-
+                objectJapanDone = true;
             }
             */
         }
 
     }
 
-    private IEnumerator DelayedLoadPlayerPosition()
+    private void ChangeTransparency(GameObject obj)
     {
-        // Wait for the next frame
-        yield return null;
+        Renderer renderer = obj.GetComponent<Renderer>();
 
-        // Get Player in position
-        LoadPlayerPosition();
+        // Get the current material color
+        Color currentColor = renderer.material.color;
+
+        // Set the new alpha value
+        currentColor.a = 0.2f;
+
+        // Update the material color with the new alpha
+        renderer.material.color = currentColor;
     }
+
+
+
+
 
     public void StartGame()
     {

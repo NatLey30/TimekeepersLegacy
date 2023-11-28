@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             gameManager.TransitionToRandomScene();
         }
 
-        if(collision.gameObject.CompareTag("Die"))
+        if(collision.gameObject.CompareTag("Die") || collision.gameObject.CompareTag("Enemy"))
         {
             gameManager.EndGame();
         }
@@ -112,12 +112,12 @@ public class PlayerMovement : MonoBehaviour
         {
             gameManager.ChangeObjectScene(3);
         }
-
+        */
         if (collision.gameObject.CompareTag("ObjectPrehistory"))
         {
             gameManager.ChangeObjectScene(4);
         }
-
+        /*
         if (collision.gameObject.CompareTag("ObjectPuzzle"))
         {
             gameManager.ChangeObjectScene(5);
