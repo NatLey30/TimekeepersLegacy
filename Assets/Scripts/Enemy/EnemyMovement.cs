@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,11 +12,18 @@ public class EnemyMovement : MonoBehaviour
 
     private Camera mainCamera;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCamera = Camera.main;
+
+        // Get GameManager
+        gameManager = FindObjectOfType<GameManager>();
+
+        GetComponent<Renderer>().material = gameManager.Material;
     }
 
     // Update is called once per frame

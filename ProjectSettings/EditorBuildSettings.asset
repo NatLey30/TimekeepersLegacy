@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RunninScenes/SceneEgypt.unity
     guid: 0f883eb66abe84f47be89103f4ddf8f4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RunninScenes/SceneAmericanWildWest.unity
     guid: e1413c96272ac0c42b605e53e14b83fc
   - enabled: 1
@@ -38,4 +38,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGames/Archery.unity
     guid: 3fa3c1c201d63ec43a2f1b87039e88a8
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/HanoiTowers.unity
+    guid: 54262dc35e46cb443ac4f2ca4734396f
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/CrossRoad.unity
+    guid: 99afac08bdd11e74892b3b8d0ff9e626
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/SpellingBee.unity
+    guid: 6fb4532ba7ecaa340b8567df23216aa2
+  - enabled: 1
+    path: Assets/Scenes/Fin.unity
+    guid: a653e9323f709b0469d6a3f2f424ec7e
   m_configObjects: {}

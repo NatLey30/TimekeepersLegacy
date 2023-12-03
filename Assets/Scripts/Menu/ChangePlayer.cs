@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangePlayer : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject enemy;
 
     private Material originalMaterial;
     private GameManager gameManager;
@@ -27,7 +27,7 @@ public class ChangePlayer : MonoBehaviour
 
     void OnMouseDown ()
     {
-        player.GetComponent<Renderer>().material = originalMaterial;
+        enemy.GetComponent<Renderer>().material = originalMaterial;
         gameManager.Material = originalMaterial;
     }
 }

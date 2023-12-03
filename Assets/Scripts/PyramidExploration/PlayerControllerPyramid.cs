@@ -8,7 +8,6 @@ public class PlayerControllerPyramid : MonoBehaviour
 {
  
     private float moveSpeed = 5f;
-    float rotationAmount = 90f;
 
     private Camera camera;
     Transform cameraFollow;

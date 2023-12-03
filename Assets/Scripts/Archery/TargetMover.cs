@@ -6,8 +6,8 @@ using UnityEngine;
 public class TargetMover : MonoBehaviour
 {
     [SerializeField] private float speed = 5f; // Speed of target movement
-    [SerializeField] private Texture2D deer1;
-    [SerializeField] private Texture2D deer2;
+    [SerializeField] private Sprite deer1;
+    [SerializeField] private Sprite deer2;
 
 
     private float leftBoundary = 0f; // Left boundary
@@ -17,13 +17,15 @@ public class TargetMover : MonoBehaviour
 
     private bool deer = true;
 
-    private Renderer renderer;
+    private SpriteRenderer renderer;
+
+    private float changeSprite = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.Rotate(0, 180, 0);
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponent<SpriteRenderer>();
         ChangeTexture();
     }
 
@@ -31,7 +33,16 @@ public class TargetMover : MonoBehaviour
     void Update()
     {
         MoveTarget();
-        ChangeTexture();
+
+        changeSprite -= Time.deltaTime;
+
+        // Check if enough time has passed to change the texture
+        if (changeSprite <= 0.0f)
+        {
+            ChangeTexture();
+            // Reset the timer for the next change
+            changeSprite = 0.5f;
+        }
 
     }
 
@@ -61,9 +72,8 @@ public class TargetMover : MonoBehaviour
  
     private void ChangeTexture()
     {
-        Material material = renderer.material;
 
-        material.mainTexture = deer ? deer2 : deer1;
+        renderer.sprite = deer ? deer2 : deer1;
 
         // Toggle 'deer' variable
         deer = !deer;

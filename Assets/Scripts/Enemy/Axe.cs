@@ -5,20 +5,14 @@ using UnityEngine;
 
 public class Axe : MonoBehaviour
 {
-    private float maxRotationAngle = 60f;
-    private float minRotationAngle = -60f;
-
-    private Transform pivot;
+    private float maxRotationAngle = 70f;
+    private float minRotationAngle = -70f;
+    private float rotationSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Set the pivot as the parent
-        pivot = transform.parent;
-
-        float rotationSpeed = 1f;
-
-        RotateContinuously(rotationSpeed);
+        RotateContinuously();
     }
 
     // Update is called once per frame
@@ -27,16 +21,16 @@ public class Axe : MonoBehaviour
 
     }
 
-    void RotateContinuously(float rotationSpeed)
+    void RotateContinuously()
     {
         // Rotates to one side
-        transform.DORotate(new Vector3(0f, 0f, maxRotationAngle), rotationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        transform.parent.DORotate(new Vector3(0f, 0f, maxRotationAngle), rotationSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             // Rotación to the ather side once completing the previous rotation
-            transform.DORotate(new Vector3(0f, 0f, minRotationAngle), rotationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            transform.parent.DORotate(new Vector3(0f, 0f, minRotationAngle), rotationSpeed).SetEase(Ease.Linear).OnComplete(() =>
             {
                 // Recursive call to rotate continously
-                RotateContinuously(rotationSpeed);
+                RotateContinuously();
             });
         });
     }

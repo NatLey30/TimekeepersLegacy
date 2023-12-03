@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CotrollerMenu : MonoBehaviour
 {
+    [SerializeField] private Canvas instructions;
+
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -11,6 +13,7 @@ public class CotrollerMenu : MonoBehaviour
     {
         // Get GameManager
         gameManager = FindObjectOfType<GameManager>();
+        instructions.enabled = false;
     }
 
     // Update is called once per frame
@@ -23,5 +26,20 @@ public class CotrollerMenu : MonoBehaviour
     {
         // Start the game on the same scene every time
         gameManager.StartGame();
+    }
+
+    public void ShowInstructions()
+    {
+        instructions.enabled = true;
+    }
+
+    public void GoBack() 
+    {
+        instructions.enabled = false;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

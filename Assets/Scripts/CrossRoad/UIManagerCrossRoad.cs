@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,11 +14,15 @@ public class UIManagerCrossRoad : MonoBehaviour
     [SerializeField] private Canvas canvasFin;
     [SerializeField] private TextMeshProUGUI gameEnd;
 
-    //[SerializeField] private BowController bowController;
+    private GameManager gameManager;
+    private bool win;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get GameManager
+        gameManager = FindObjectOfType<GameManager>();
+
         canvasFin.enabled = false;
         player.SetActive(false);
         spawner.SetActive(false);
@@ -45,10 +50,12 @@ public class UIManagerCrossRoad : MonoBehaviour
         if (car)
         {
             EndGame("GameOver");
+            win = false;
         }
         else
         {
             EndGame("You Win");
+            win = true;
         }
     }
 
@@ -66,5 +73,9 @@ public class UIManagerCrossRoad : MonoBehaviour
         canvasFin.enabled = true;
         player.SetActive(false);
         spawner.SetActive(false);
+    }
+    public void ReturnToRunningScene()
+    {
+        gameManager.ReturnToRunningScene(win);
     }
 }

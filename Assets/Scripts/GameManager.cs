@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Unity.VisualScripting;
-using UnityEditor.Build;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,6 +33,7 @@ public class PlayerData
     }
 }
 
+[System.Serializable]
 public class EnemyData
 {
     private float posX;
@@ -67,17 +66,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject objectEgyptPrefab;
     [SerializeField] private GameObject objectMiddleAgesPrefab;
-    //[SerializeField] private GameObject objectPresentPrefab;
+    [SerializeField] private GameObject objectPresentPrefab;
     [SerializeField] private GameObject objectPrehistoryPrefab;
     [SerializeField] private GameObject objectJapanPrefab;
 
+    [SerializeField] private Material original;
+
     private GameObject player;
     private GameObject enemy;
+
     private GameObject objectEgypt;
     private GameObject objectMiddleAges;
-    //private GameObject objectPresent;
+    private GameObject objectPresent;
     private GameObject objectPrehistory;
     private GameObject objectJapan;
+
     private Material material;
 
     private List<string> sceneNames = new List<string>();
@@ -125,6 +128,8 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GameObject.FindGameObjectWithTag("Enemy");
 
+        Material = original;
+
         // We dont want the game manager to be destrayed when changing scenes
         DontDestroyOnLoad(gameObject);
 
@@ -133,14 +138,13 @@ public class GameManager : MonoBehaviour
         sceneNames.Add("SceneEgypt");
         sceneNames.Add("SceneMiddleAges");
         sceneNames.Add("ScenePrehistory");
-        //sceneNames.Add("ScenePresent");
+        sceneNames.Add("ScenePresent");
         sceneNames.Add("SceneJapan");
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void Awake()
@@ -164,15 +168,24 @@ public class GameManager : MonoBehaviour
             sceneNamesCopy.Remove(currentScene);
         }
 
-        // Randomly choose a scene from the available scenes.
-        int randomIndex = Random.Range(0, sceneNamesCopy.Count);
-        string sceneToLoad = sceneNamesCopy[randomIndex];
+        // If the player has dollected all the objects it can save the future
+        if (objectEgyptDone && objectMiddleAgesDone && ObjectPrehistoryDone && ObjectPresentDone && ObjectJapanDone)
+        {
+            // Load the chosen scene.
+            ChangeScene("Fin", false);
+        }
+        else
+        { 
+            // Randomly choose a scene from the available scenes.
+            int randomIndex = Random.Range(0, sceneNamesCopy.Count);
+            string sceneToLoad = sceneNamesCopy[randomIndex];
 
-        // Load the chosen scene.
-        ChangeScene(sceneToLoad, true);
+            // Load the chosen scene.
+            ChangeScene(sceneToLoad, true);
 
-        // Place Minigame Object
-        StartCoroutine(DelayedPlaceObject(sceneToLoad));
+            // Place Minigame Object
+            StartCoroutine(DelayedPlaceObject(sceneToLoad));
+        }
 
 
     }
@@ -208,12 +221,18 @@ public class GameManager : MonoBehaviour
             // Load the Pyramid Exploration Minigame scene
             ChangeScene("Archery", false);
         }
-        /*
         else if (num == 3)
         {
+            // Save player's position too
+            SavePlayerPosition();
+            SaveEnemyPosition();
 
+            // Save current scene mame
+            currentScene = SceneManager.GetActiveScene().name;
+
+            // Load the Pyramid Exploration Minigame scene
+            ChangeScene("CrossRoad", false);
         }
-        */
         else if (num == 4)
         {
             // Save player's position too
@@ -226,7 +245,6 @@ public class GameManager : MonoBehaviour
             // Load the Pyramid Exploration Minigame scene
             ChangeScene("SpellingBee", false);
         }
-        /*
         else
         {
             // Save player's position too
@@ -237,10 +255,8 @@ public class GameManager : MonoBehaviour
             currentScene = SceneManager.GetActiveScene().name;
 
             // Load the Pyramid Exploration Minigame scene
-            ChangeScene("Puzzle", false);
+            ChangeScene("HanoiTowers", false);
         }
-        */
-
     }
 
     private void ChangeScene(string Name, bool find)
@@ -302,13 +318,18 @@ public class GameManager : MonoBehaviour
                 ChangeTransparency(objectMiddleAges);
             }
         }
-        /*
-        else if (sceneToLoad == "")
+        else if (sceneToLoad == "ScenePresent")
         {
-            
+            objectPresent = Instantiate(objectPresentPrefab);
+            objectPresent.transform.position = new Vector3(80, 0, 0);
+
+            if (objectPresentDone)
+            {
+                objectPresent.layer = LayerMask.NameToLayer("ObjectFound");
+                ChangeTransparency(objectPresent);
+            }
         }
-        */
-        else if (sceneToLoad == "")
+        else if (sceneToLoad == "ScenePrehistory")
         {
             objectPrehistory = Instantiate(objectPrehistoryPrefab);
             objectPrehistory.transform.position = new Vector3(80, 0, 0);
@@ -319,7 +340,6 @@ public class GameManager : MonoBehaviour
                 ChangeTransparency(objectPrehistory);
             }
         }
-        /*
         else if (sceneToLoad == "SceneJapan")
         {
             objectJapan = Instantiate(objectJapanPrefab);
@@ -331,7 +351,6 @@ public class GameManager : MonoBehaviour
                 ChangeTransparency(objectJapan);
             }
         }
-        */
     }
 
     private void SavePlayerPosition()
@@ -409,22 +428,18 @@ public class GameManager : MonoBehaviour
             {
                 objectMiddleAgesDone = true;
             }
-            /*
-            else if (currentScene == "")
+            else if (currentScene == "ScenePresent")
             {
-                
+                objectPresentDone = true;
             }
-            */
             else if (currentScene == "ScenePrehistory")
             {
                 objectPrehistoryDone = true;
             }
-            /*
-            else if (currentScene == "Japan")
+            else if (currentScene == "SceneJapan")
             {
                 objectJapanDone = true;
             }
-            */
         }
 
     }
@@ -443,10 +458,6 @@ public class GameManager : MonoBehaviour
         renderer.material.color = currentColor;
     }
 
-
-
-
-
     public void StartGame()
     {
         ChangeScene("SceneDystopicFuture", true);
@@ -461,5 +472,6 @@ public class GameManager : MonoBehaviour
         objectPresentDone = false;
         objectPrehistoryDone = false;
         objectJapanDone = false;
+        Material = original;
     }
 }

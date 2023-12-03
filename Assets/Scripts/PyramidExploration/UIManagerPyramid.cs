@@ -17,6 +17,7 @@ public class UIManagerPyramid : MonoBehaviour
 
 
     private GameManager gameManager;
+
     private bool win = false;
 
     // Start is called before the first frame update

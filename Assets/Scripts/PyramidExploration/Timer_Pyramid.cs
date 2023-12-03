@@ -29,7 +29,5 @@ public class Timer_Pyramid : MonoBehaviour
             // Call the EndGame method
             manager.EndGame("Time's up!");
         }
-
     }
-
 }
